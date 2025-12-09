@@ -1,5 +1,7 @@
 from flask import Flask, jsonify
 import mysql.connector
+from flask_cors import CORS
+from flask_compress import Compress
 
 DB_HOST = "103.16.116.155"
 DB_PORT = 3306
@@ -8,6 +10,8 @@ DB_PASSWORD = "ubaya"
 DB_NAME = "react_daniel"  
 
 app = Flask(__name__)
+CORS(app)
+Compress(app)
 
 def get_db_conn():
     return mysql.connector.connect(
@@ -17,7 +21,7 @@ def get_db_conn():
 
 @app.get("/movies")
 def get_movies():
-    sql = f"SELECT * FROM  movies LIMIT 50;"
+    sql = "SELECT id, title, year, poster_url FROM movies LIMIT 50;"
     try:
         conn = get_db_conn()
         cur = conn.cursor()
@@ -34,5 +38,4 @@ def get_movies():
             pass
 
 if __name__ == "__main__":
-    # Local run: python app/main.py
     app.run(host="0.0.0.0", port=8000)
