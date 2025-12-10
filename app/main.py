@@ -3,7 +3,7 @@ import mysql.connector
 from flask_cors import CORS
 from flask_compress import Compress
 
-DB_HOST = "mysql-movies"
+DB_HOST = "103.16.116.155"
 DB_PORT = 3306
 DB_USER = "react_daniel"
 DB_PASSWORD = "ubaya"
